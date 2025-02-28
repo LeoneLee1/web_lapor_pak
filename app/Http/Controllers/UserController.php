@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use RealRashid\SweetAlert\Facades\Alert;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -42,6 +43,10 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->name = $request->name;
         $user->password = bcrypt($request->password);
+
+        if (!File::exists(public_path('avatar'))) {
+            File::makeDirectory(public_path('avatar'), 0755, true, true);
+        }
         
         if ($request->hasFile('avatar')) {
             $fileName = time() . '.' . $request->avatar->extension();
@@ -79,6 +84,10 @@ class UserController extends Controller
             //
         } else {            
             $user->password = bcrypt($request->password);
+        }
+
+        if (!File::exists(public_path('avatar'))) {
+            File::makeDirectory(public_path('avatar'), 0755, true, true);
         }
         
         if ($request->hasFile('avatar')) {
