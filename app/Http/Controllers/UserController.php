@@ -91,6 +91,14 @@ class UserController extends Controller
         }
         
         if ($request->hasFile('avatar')) {
+
+            if ($user->avatar) {
+                $oldFilePath = public_path('avatar/' . $user->avatar);
+                if (file_exists($oldFilePath)) {
+                    unlink($oldFilePath);
+                }
+            }
+
             $fileName = time() . '.' . $request->avatar->extension();
             $request->avatar->move(public_path('avatar'), $fileName);
             $user->avatar = $fileName;
