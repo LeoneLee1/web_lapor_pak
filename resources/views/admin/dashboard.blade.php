@@ -13,7 +13,7 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">
                                 Total Kategori Laporan</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $kategori }}</div>
                         </div>
                     </div>
                 </div>
@@ -26,7 +26,7 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">
                                 Total Laporan</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $laporan }}</div>
                         </div>
                     </div>
                 </div>
@@ -39,7 +39,7 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">
                                 Total Masyarakat</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $masyarakat }}</div>
                         </div>
                     </div>
                 </div>

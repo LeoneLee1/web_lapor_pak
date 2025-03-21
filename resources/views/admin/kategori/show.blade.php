@@ -1,15 +1,15 @@
 @extends('layout.app')
 
-@section('title', 'Show Data Masyarakat - Lapor Pak')
+@section('title', 'Show Data Kategori Laporan - Lapor Pak')
 
 @section('header-title')
-    <a href="{{ route('data_masyarakat') }}" class="btn btn-danger">Kembali</a>
+    <a href="{{ route('data_kategori_laporan') }}" class="btn btn-danger">Kembali</a>
 @endsection
 
 @section('content')
     <div class="card">
         <div class="card-header">
-            <h6 class="text-primary">Detail Masyarakat</h6>
+            <h6 class="text-primary">Detail Kategori Laporan</h6>
         </div>
         <div class="card-body">
             <table class="table table-bordered">
@@ -21,17 +21,9 @@
                 </thead>
                 <tbody>
                     <tr class="text-left">
-                        <td>Email</td>
-                        <td>{{ $data->email }}</td>
-                    </tr>
-                    <tr class="text-left">
-                        <td>Role</td>
-                        <td>{{ $data->role }}</td>
-                    </tr>
-                    <tr class="text-left">
-                        <td>Avatar</td>
+                        <td>Icon</td>
                         <td>
-                            <img src="{{ asset('avatar/' . $data->avatar) }}" alt="avatar" class="img-fluid"
+                            <img src="{{ asset('icon/' . $data->icon) }}" alt="icon" class="img-fluid"
                                 style="width: 500px;">
                         </td>
                     </tr>

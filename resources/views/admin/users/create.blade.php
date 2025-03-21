@@ -9,7 +9,7 @@
 @section('content')
     <div class="card">
         <div class="card-header">
-            <h5 class="text-primary">Tambah Data</h5>
+            <h6 class="text-primary">Tambah Data</h6>
         </div>
         <div class="card-body">
             <form action="{{ route('data_masyarakat.insert') }}" method="POST" enctype="multipart/form-data">
@@ -46,6 +46,22 @@
                     @enderror">
                 </div>
                 @error('password')
+                    <div class="mb-3 alert alert-danger">
+                        {{ $message }}
+                    </div>
+                @enderror
+                <div class="mb-3">
+                    <label for="role">Role</label>
+                    <select name="role" id="role"
+                        class="form-select @error('role')
+                        is-invalid
+                    @enderror">
+                        <option value="" selected disabled>Pilih</option>
+                        <option value="user">user</option>
+                        <option value="admin">admin</option>
+                    </select>
+                </div>
+                @error('role')
                     <div class="mb-3 alert alert-danger">
                         {{ $message }}
                     </div>

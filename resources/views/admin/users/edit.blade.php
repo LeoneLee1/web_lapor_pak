@@ -9,7 +9,7 @@
 @section('content')
     <div class="card">
         <div class="card-header">
-            <h5 class="text-primary">Edit Data</h5>
+            <h6 class="text-primary">Edit Data</h6>
         </div>
         <div class="card-body">
             <form action="{{ route('data_masyarakat.update', $user->id) }}" method="POST" enctype="multipart/form-data">
@@ -37,6 +37,14 @@
                 <div class="mb-3">
                     <label for="password">Password</label>
                     <input type="text" name="password" id="password" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label for="role">Role</label>
+                    <select name="role" id="role" class="form-select">
+                        <option value="{{ $user->role }}" selected>{{ $user->role }}</option>
+                        <option value="user">user</option>
+                        <option value="admin">admin</option>
+                    </select>
                 </div>
                 <div class="mb-3">
                     <label for="avatar">Avatar</label>

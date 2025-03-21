@@ -37,12 +37,14 @@ class UserController extends Controller
             'name' => 'required|max:255',
             'password' => 'required|max:255',
             'avatar' => 'nullable|image',
+            'role' => 'required',
         ]);
 
         $user = new User();
         $user->email = $request->email;
         $user->name = $request->name;
         $user->password = bcrypt($request->password);
+        $user->role = $request->role;
 
         if (!File::exists(public_path('avatar'))) {
             File::makeDirectory(public_path('avatar'), 0755, true, true);
@@ -74,11 +76,13 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required|max:255',
             'password' => 'nullable|max:255',
+            'role' => 'required',
             'avatar' => 'nullable|image',
         ]);
 
         $user = User::findOrFail($id);
         $user->name = $request->name;
+        $user->role = $request->role;
 
         if ($request->password === '' || $request->password === null) {
             //
@@ -121,6 +125,13 @@ class UserController extends Controller
 
     public function delete($id){
         $data = User::findOrFail($id);
+
+        if ($data->avatar) {
+            $oldFilePath = public_path('avatar/' . $data->avatar);
+            if (file_exists($oldFilePath)) {
+                unlink($oldFilePath);
+            }
+        }
         
         if ($data->delete()) {
             toast('Berhasil Menghapus Data','success');
