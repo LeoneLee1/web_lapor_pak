@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('pelapor');
             $table->string('judul');
             $table->string('bukti');
-            $table->string('deksripsi');
+            $table->string('deskripsi');
             $table->string('latitude');
             $table->string('longitude');
             $table->string('alamat');

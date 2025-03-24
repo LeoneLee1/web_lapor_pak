@@ -5,6 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login - Lapor Pak</title>
+    <link rel="shortcut icon" href="{{ asset('icon/alarm.png') }}" type="image/x-icon">
     <style>
         * {
             box-sizing: border-box;
@@ -142,8 +143,8 @@
             <button class="btn-login" type="submit">Masuk</button>
         </form>
         <div class="links">
-            <a href="#">Belum punya akun?</a> |
-            <a href="#">Lupa password?</a>
+            <a href="{{ route('register') }}">Belum punya akun?</a> |
+            <a href="{{ route('forgot_password') }}">Lupa password?</a>
         </div>
     </div>
 </body>

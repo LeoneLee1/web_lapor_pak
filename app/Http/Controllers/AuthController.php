@@ -25,6 +25,22 @@ class AuthController extends Controller
         }
     }
 
+    public function register(){
+        return view('Auth.register');
+    }
+
+    public function register_process(Request $request){
+        //
+    }
+
+    public function forgot_password(){
+        return view('Auth.forgot_password');
+    }
+
+    public function forgot_password_process(Request $request){
+        //
+    }
+
     public function logout(){
         Auth::logout();
 

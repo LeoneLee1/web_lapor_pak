@@ -41,7 +41,7 @@
                     [10, 50, 100, -1],
                     [10, 50, 100, "All"]
                 ],
-                ajax: '{{ route('data_kategori_laporan.json') }}',
+                ajax: '{{ route('data_laporan.json') }}',
                 columns: [{
                         name: 'DT_RowIndex',
                         data: 'DT_RowIndex',
@@ -50,18 +50,33 @@
                         className: 'text-center'
                     },
                     {
-                        data: 'name',
-                        name: 'name',
+                        data: 'kode_laporan',
+                        name: 'kode_laporan',
                         className: 'text-center'
                     },
                     {
-                        name: 'icon',
-                        data: 'icon',
+                        data: 'pelapor',
+                        name: 'pelapor',
+                        className: 'text-center'
+                    },
+                    {
+                        data: 'kategori',
+                        name: 'kategori',
+                        className: 'text-center'
+                    },
+                    {
+                        data: 'judul',
+                        name: 'judul',
+                        className: 'text-center'
+                    },
+                    {
+                        name: 'bukti',
+                        data: 'bukti',
                         orderable: false,
                         searchable: false,
                         className: 'text-center',
                         render: function(data, type, row) {
-                            return '<img src="icon/' + data +
+                            return '<img src="bukti_laporan/' + data +
                                 '" class="img-fluid" alt="avatar" style="width= 250px; height: auto;" /> ';
                         }
                     },
@@ -71,11 +86,11 @@
                         orderable: false,
                         searchable: false,
                         render: function(data, type, row) {
-                            return '<a href="data_kategori_laporan/edit/' + data +
+                            return '<a href="data_laporan/edit/' + data +
                                 '" class="btn btn-warning">Edit</a>&nbsp;' +
-                                '<a href="data_kategori_laporan/show/' +
+                                '<a href="data_laporan/show/' +
                                 data + '" class="btn btn-info">Show</a>&nbsp;' +
-                                '<a href="data_kategori_laporan/delete/' + data +
+                                '<a href="data_laporan/delete/' + data +
                                 '" class="btn btn-danger" data-confirm-delete="true">Delete</a>';
                         },
                         className: 'text-center'

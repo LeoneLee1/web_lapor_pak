@@ -4,8 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Daftar Pengguna Baru</title>
-    <link rel="shortcut icon" href="{{ asset('icon/alarm.png') }}" type="image/x-icon">
+    <title>Lupa Password</title>
     <style>
         * {
             box-sizing: border-box;
@@ -22,7 +21,7 @@
             min-height: 100vh;
         }
 
-        .register-container {
+        .forgot-container {
             background: #ffffff;
             padding: 2rem;
             border-radius: 16px;
@@ -33,7 +32,7 @@
 
         h2 {
             color: #2e7d32;
-            margin-bottom: 0.2rem;
+            margin-bottom: 0.3rem;
         }
 
         p {
@@ -41,10 +40,7 @@
             margin-bottom: 1.5rem;
         }
 
-        input[type="email"],
-        input[type="text"],
-        input[type="password"],
-        input[type="file"] {
+        input[type="email"] {
             width: 100%;
             padding: 0.8rem;
             margin-bottom: 1rem;
@@ -53,10 +49,9 @@
             background-color: #f9fff9;
             outline: none;
             box-shadow: none;
-            appearance: none;
         }
 
-        .btn-register {
+        .btn-reset {
             width: 100%;
             padding: 0.8rem;
             border: none;
@@ -65,10 +60,9 @@
             color: white;
             font-weight: bold;
             cursor: pointer;
-            margin-top: 0.5rem;
         }
 
-        .btn-register:hover {
+        .btn-reset:hover {
             background-color: #1b5e20;
         }
 
@@ -90,19 +84,18 @@
 </head>
 
 <body>
-    <div class="register-container">
-        <h2>Daftar sebagai Pengguna Baru</h2>
-        <p>Silakan mengisi form di bawah ini untuk mendaftar</p>
-        <form action="{{ route('register.proses') }}" method="POST" enctype="multipart/form-data">
+    <div class="forgot-container">
+        <h2>Lupa Password</h2>
+        <p>Masukkan email kamu untuk mendapatkan link reset password.</p>
+
+        <form action="{{ route('forgot_password.proses') }}" method="POST" enctype="multipart/form-data">
             @csrf
-            <input type="email" name="email" id="email" placeholder="Email" required />
-            <input type="text" name="name" id="name" placeholder="Nama Lengkap" required />
-            <input type="file" name="foto" id="foto" accept="image/*" required />
-            <input type="password" name="password" id="password" placeholder="Password" required />
-            <button class="btn-register" type="submit">Daftar</button>
+            <input type="email" name="email" placeholder="Email" required />
+            <button class="btn-reset" type="submit">Kirim Link Reset</button>
         </form>
+
         <div class="links">
-            <a href="{{ route('login') }}">Sudah punya akun?</a>
+            <a href="{{ route('login') }}">Ingat password? Masuk di sini</a>
         </div>
     </div>
 </body>

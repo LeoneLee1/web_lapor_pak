@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('progress', function (Blueprint $table) {
             $table->id();
-            $table->string('bukti');
+            $table->string('bukti')->nullable();
             $table->enum('status',['Delivered','In Process','Complete','Rejected']);
             $table->string('deskripsi');
             $table->integer('laporans_id')->constrained('laporans')->cascadeOnDelete();

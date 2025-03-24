@@ -14,10 +14,16 @@ use Yajra\DataTables\Facades\DataTables;
 class LaporanController extends Controller
 {
     public function data_laporan_json(){
-        $data = Laporan::orderBy('id','desc')->get();
+
+        $data = Laporan::with('category')
+                ->orderBy('id', 'desc')
+                ->get();
 
         return DataTables::of($data)
         ->addIndexColumn()
+        ->addColumn('kategori', function($laporan) {
+            return $laporan->category->name;
+        })
         ->make(true);
     }
 
@@ -81,57 +87,69 @@ class LaporanController extends Controller
     }
 
     public function edit($id){
-        $kategori = Category::findOrFail($id);
+        $laporan = Laporan::with('category')
+                ->where('id',$id)
+                ->first();
 
-        return view('admin.kategori.edit',compact('kategori'));
+        $kategori = Category::all();
+
+        return view('admin.laporan.edit',compact('laporan','kategori'));
     }
 
     public function update(Request $request, $id){
         $request->validate([
-            'name' => 'required|max:255',
+            'judul' => 'required|string',
+            'deskripsi' => 'required|string',
+            'alamat' => 'required|string',
         ]);
 
-        $kategori = Category::findOrFail($id);
-        $kategori->name = $request->name;
+        $laporan = Laporan::findOrFail($id);
+        $laporan->judul = $request->judul;
+        $laporan->deskripsi = $request->deskripsi;
+        $laporan->latitude = $request->latitude;
+        $laporan->longitude = $request->longitude;
+        $laporan->alamat = $request->alamat;
 
-        if (!File::exists(public_path('icon'))) {
-            File::makeDirectory(public_path('icon'), 0755, true, true);
+        if (!File::exists(public_path('bukti_laporan'))) {
+            File::makeDirectory(public_path('bukti_laporan'), 0755, true, true);
         }
         
-        if ($request->hasFile('icon')) {
+        if ($request->hasFile('bukti')) {
 
-            if ($kategori->icon) {
-                $oldFilePath = public_path('icon/' . $kategori->icon);
+            if ($laporan->bukti) {
+                $oldFilePath = public_path('bukti_laporan/' . $laporan->bukti);
                 if (file_exists($oldFilePath)) {
                     unlink($oldFilePath);
                 }
             }
 
-            $fileName = time() . '.' . $request->icon->extension();
-            $request->icon->move(public_path('icon'), $fileName);
-            $kategori->icon = $fileName;
+            $fileName = time() . '.' . $request->bukti->extension();
+            $request->bukti->move(public_path('bukti_laporan'), $fileName);
+            $laporan->bukti = $fileName;
         }
 
-        if ($kategori->save()) {
-            toast('Berhasil Menambah Data','success');
+        if ($laporan->save()) {
+            toast('Berhasil Mengubah Data','success');
             return redirect()->route('data_kategori_laporan');
         } else {
-            toast('Gagal Menambah Data','error');
+            toast('Gagal Mengubah Data','error');
             return redirect()->back();
         }
     }
-    
-    public function show($id){
-        $data = Category::findOrFail($id);
 
-        return view('admin.kategori.show',compact('data'));
+    public function show($id){
+        $data = Laporan::with('category')
+                ->where('id',$id)
+                ->first();
+
+        return view('admin.laporan.show',compact('data'));
     }
 
     public function delete($id){
-        $data = Category::findOrFail($id);
+        $data = Laporan::findOrFail($id);
 
-        if ($data->icon) {
-            $oldFilePath = public_path('icon/' . $data->icon);
+        if ($data->bukti) {
+            $oldFilePath = public_path('bukti_laporan/' . $data->bukti);
             if (file_exists($oldFilePath)) {
                 unlink($oldFilePath);
             }
