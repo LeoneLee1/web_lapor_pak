@@ -15,9 +15,16 @@ use App\Http\Controllers\ProgressController;
 
 
 Route::get('/', function (){
-    return view('welcome');
+
+    $categories = Category::all();
+
+    $laporan = Laporan::orderBy('id','desc')->get();
+
+    return view('Pages.beranda',compact('categories','laporan'));
 });
 
+
+// CMS ADMIN PANNEL
 Route::middleware(['auth','admin'])->group(function (){
 
     Route::get('/admin', function () {
@@ -84,5 +91,17 @@ Route::post('/register/proses',[AuthController::class,'register_process'])->name
 Route::get('/forgot_password',[AuthController::class,'forgot_password'])->name('forgot_password');
 Route::post('/forgot_password/proses',[AuthController::class,'forgot_password_process'])->name('forgot_password.proses');
 Route::get('/logout',[AuthController::class,'logout'])->name('logout');
+
+
+// FRONTEND PAGES
+
+Route::middleware(['auth'])->group(function () {
+    
+    Route::prefix('profile')->group(function (){
+        Route::get('/', function (){
+            return view('Pages.profile');
+        })->name('profile');
+    });
+});
 
 
