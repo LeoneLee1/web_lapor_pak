@@ -1,4 +1,4 @@
-@extends('welcome')
+@extends('Components.base')
 
 @push('after-style')
     <style>

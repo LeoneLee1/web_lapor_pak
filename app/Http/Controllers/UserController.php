@@ -140,6 +140,5 @@ class UserController extends Controller
             toast('Gagal Menghapus Data','error');
             return redirect()->back();
         }
-        
     }
 }

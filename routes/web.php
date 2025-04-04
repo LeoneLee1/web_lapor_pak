@@ -10,6 +10,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Controllers\LaporanController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProgressController;
 
@@ -96,12 +97,14 @@ Route::get('/logout',[AuthController::class,'logout'])->name('logout');
 // FRONTEND PAGES
 
 Route::middleware(['auth'])->group(function () {
-    
+
     Route::prefix('profile')->group(function (){
-        Route::get('/', function (){
-            return view('Pages.profile');
-        })->name('profile');
+        Route::get('/',[ProfileController::class,'index'])->name('profile');
+        Route::get('/{id}',[ProfileController::class,'settings'])->name('profile.settings');
+        Route::post('/update/{id}',[ProfileController::class,'update_settings'])->name('profile.update');
+        Route::get('/kata_sandi/{id}',[ProfileController::class,'kata_sandi'])->name('profile.kata_sandi');
     });
+
 });
 
 
