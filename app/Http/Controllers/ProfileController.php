@@ -68,11 +68,4 @@ class ProfileController extends Controller
             return redirect()->back();
         }
     }
-
-    public function kata_sandi($id){
-
-        $user = User::findOrFail($id);
-
-        return view('Pages.Profile.kata_sandi',compact('user'));
-    }
 }

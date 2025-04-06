@@ -102,14 +102,14 @@
             <a href="{{ route('profile.settings', Auth::user()->id) }}" style="text-decoration: none;">
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     <div class="d-flex align-items-center">
-                        <i class="fa fa-user me-3"></i>
+                        <i class="fa fa-cog me-3"></i>
                         <span>Pengaturan Akun</span>
                     </div>
                     <i class="fa fa-chevron-right"></i>
                 </li>
             </a>
 
-            <a href="{{ route('profile.kata_sandi', Auth::user()->id) }}" style="text-decoration: none;">
+            {{-- <a href="{{ route('profile.kata_sandi', Auth::user()->id) }}" style="text-decoration: none;">
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     <div class="d-flex align-items-center">
                         <i class="fa fa-lock me-3"></i>
@@ -117,9 +117,9 @@
                     </div>
                     <i class="fa fa-chevron-right"></i>
                 </li>
-            </a>
+            </a> --}}
 
-            <a href="" style="text-decoration: none;">
+            <a href="{{ route('profile.bantuanDukungan') }}" style="text-decoration: none;">
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     <div class="d-flex align-items-center">
                         <i class="fa fa-info-circle me-3"></i>

@@ -100,11 +100,13 @@ Route::middleware(['auth'])->group(function () {
 
     Route::prefix('profile')->group(function (){
         Route::get('/',[ProfileController::class,'index'])->name('profile');
-        Route::get('/{id}',[ProfileController::class,'settings'])->name('profile.settings');
+        Route::get('/settings/{id}',[ProfileController::class,'settings'])->name('profile.settings');
         Route::post('/update/{id}',[ProfileController::class,'update_settings'])->name('profile.update');
-        Route::get('/kata_sandi/{id}',[ProfileController::class,'kata_sandi'])->name('profile.kata_sandi');
+        Route::get('/support', function (){
+            return view('Pages.Profile.bantuanDukungan');
+        })->name('profile.bantuanDukungan'); 
     });
-
 });
+
 
 
