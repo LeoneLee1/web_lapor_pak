@@ -15,8 +15,10 @@ class AuthController extends Controller
     public function login(Request $request){
         if (Auth::attempt($request->only('email','password'))) {
             if (Auth::user()->role === 'admin') {
+                toast('Berhasil masuk akun!','success');
                 return redirect('/admin');
             } elseif (Auth::user()->role === 'user') {
+                toast('Berhasil masuk akun!','success');
                 return redirect('/');
             } else {
                 Alert::error('Email atau Password Salah!.');

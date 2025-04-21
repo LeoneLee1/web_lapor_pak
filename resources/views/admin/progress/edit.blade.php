@@ -12,8 +12,9 @@
             <h6 class="text-primary">Edit Data Progress Laporan {{ $kode->kode_laporan }}</h6>
         </div>
         <div class="card-body">
-            <form action="{{ route('progress.insert') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('progress.update', $progress->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
+                <input type="hidden" name="id" id="id" value="{{ $kode->id }}">
                 <div class="mb-3">
                     <label for="bukti">Bukti</label>
                     <input type="file" name="bukti" id="bukti" class="form-control">
@@ -24,6 +25,7 @@
                         class="form-select @error('status')
                         is-invalid
                     @enderror">
+                        <option value="{{ $progress->status }}">{{ $progress->status }}</option>
                         <option value="Delivered">Delivered</option>
                         <option value="In Process">In Process</option>
                         <option value="Complete">Complete</option>
@@ -37,7 +39,7 @@
                 @enderror
                 <div class="mb-3">
                     <label for="deskripsi">Deskripsi</label>
-                    <textarea name="deskripsi" id="deskripsi" cols="30" rows="10" class="form-control"></textarea>
+                    <textarea name="deskripsi" id="deskripsi" cols="30" rows="10" class="form-control">{{ $progress->deskripsi }}</textarea>
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>

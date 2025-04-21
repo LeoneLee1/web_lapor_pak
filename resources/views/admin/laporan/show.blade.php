@@ -127,8 +127,8 @@
                         searchable: false,
                         className: 'text-center',
                         render: function(data, type, row) {
-                            return '<img src="progress/' + data +
-                                '" class="img-fluid" alt="avatar" style="width= 250px; height: auto;" /> ';
+                            return '<img src="{{ asset('progress') }}/' + data +
+                                '" class="img-fluid" alt="progress" style="width= 250px; height: auto;" /> ';
                         }
                     },
                     {
@@ -147,7 +147,7 @@
                         orderable: false,
                         searchable: false,
                         render: function(data, type, row) {
-                            return '<a href="progress/edit/' + data +
+                            return '<a href="/progress/edit/' + data +
                                 '" class="btn btn-warning">Edit</a>&nbsp;' +
                                 '<a href="progress/delete/' + data +
                                 '" class="btn btn-danger" data-confirm-delete="true">Delete</a>';

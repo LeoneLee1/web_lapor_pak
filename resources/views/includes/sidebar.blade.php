@@ -49,6 +49,8 @@
     {{ request()->is('data_laporan/create') ? 'active' : '' }}
     {{ request()->is('data_laporan/show/*') ? 'active' : '' }}
     {{ request()->is('data_laporan/edit/*') ? 'active' : '' }}
+    {{ request()->is('progress/create/*') ? 'active' : '' }}
+    {{ request()->is('progress/edit/*') ? 'active' : '' }}
     ">
         <a class="nav-link" href="{{ route('data_laporan') }}">
             <i class="fas fa-fw fa-table"></i>

@@ -9,21 +9,14 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\AdminMiddleware;
+use App\Http\Controllers\BerandaController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProgressController;
 
 
-Route::get('/', function (){
-
-    $categories = Category::all();
-
-    $laporan = Laporan::orderBy('id','desc')->get();
-
-    return view('Pages.beranda',compact('categories','laporan'));
-});
-
+Route::get('/',[BerandaController::class,'index'])->name('/');
 
 // CMS ADMIN PANNEL
 Route::middleware(['auth','admin'])->group(function (){
@@ -106,6 +99,14 @@ Route::middleware(['auth'])->group(function () {
             return view('Pages.Profile.bantuanDukungan');
         })->name('profile.bantuanDukungan'); 
     });
+
+    Route::get('laporanmu',[BerandaController::class,'laporanmu'])->name('laporanmu');
+
+    Route::prefix('camera')->group(function (){
+        Route::get('/',[BerandaController::class,'camera'])->name('camera');
+    });
+
+    Route::get('/chat',[BerandaController::class,'chat'])->name('chat');
 });
 
 

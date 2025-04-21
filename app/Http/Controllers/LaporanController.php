@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Laporan;
 use App\Models\Category;
+use App\Models\Progress;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -78,6 +79,13 @@ class LaporanController extends Controller
         }
 
         if ($laporan->save()) {
+
+            $delivered = new Progress();
+            $delivered->status = 'Delivered';
+            $delivered->deskripsi = 'Laporan terkirim';
+            $delivered->laporans_id = $laporan->id;
+            $delivered->save();
+
             toast('Berhasil membuat laporan','success');
             return redirect()->route('data_laporan');
         } else {
@@ -162,7 +170,6 @@ class LaporanController extends Controller
             toast('Gagal Menghapus Data','error');
             return redirect()->back();
         }
-        
     }
 
 }

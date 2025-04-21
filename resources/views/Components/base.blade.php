@@ -46,6 +46,7 @@
 <body>
     <div id="loader" class="center"></div>
     @yield('content')
+    <div class="mb-4"></div>
     @include('Components.TabNavigator')
     @include('sweetalert::alert')
     <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>

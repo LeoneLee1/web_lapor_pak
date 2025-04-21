@@ -69,14 +69,19 @@
         <span class="label">Beranda</span>
     </div>
     <div class="tab-item" id="report-tab">
-        <a class="icon"><i class="fa fa-clipboard"
-                style="color: {{ request()->is('report') ? 'green' : 'grey' }}"></i></a>
+        <a href="{{ route('laporanmu') }}" class="icon"><i class="fa fa-clipboard"
+                style="color: {{ request()->is('laporanmu') ? 'green' : 'grey' }}"></i></a>
         <span class="label">Laporanmu</span>
     </div>
     <div class="tab-item" id="camera-tab">
-        <a class="icon"><i class="fa fa-camera"
+        <a href="{{ route('camera') }}" class="icon"><i class="fa fa-camera"
                 style="color: {{ request()->is('camera') ? 'green' : 'grey' }}"></i></a>
         <span class="label">Kamera</span>
+    </div>
+    <div class="tab-item" id="camera-tab">
+        <a href="{{ route('chat') }}" class="icon"><i class="fa fa-comment"
+                style="color: {{ request()->is('chat') ? 'green' : 'grey' }}"></i></a>
+        <span class="label">Chat</span>
     </div>
     <div class="tab-item" id="profile-tab">
         <a href="{{ route('profile') }}" class="icon"><i class="fa fa-user"

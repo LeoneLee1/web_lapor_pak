@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Laporan;
 use App\Models\Progress;
 use Illuminate\Http\Request;
+use App\Models\RiwayatPerkembangan;
 use Illuminate\Support\Facades\File;
 use RealRashid\SweetAlert\Facades\Alert;
 use Yajra\DataTables\Facades\DataTables;
@@ -12,7 +13,7 @@ use Yajra\DataTables\Facades\DataTables;
 class ProgressController extends Controller
 {
     public function progress_json($id){
-        $data = Progress::where('laporans_id',$id);
+        $data = Progress::where('laporans_id',$id)->orderByDesc('id');
 
         return DataTables::of($data)
         ->addIndexColumn()
@@ -48,6 +49,10 @@ class ProgressController extends Controller
         }
 
         if ($progress->save()) {
+            $lastest = new RiwayatPerkembangan();
+            $lastest->activity = $progress->deskripsi;
+            $lastest->progress_id = $progress->id;
+            $lastest->laporans_id = $progress->laporans_id;
             toast('Berhasil membuat progress','success');
             return redirect()->back();
         } else {
@@ -72,8 +77,10 @@ class ProgressController extends Controller
         ]);
 
         $progress = Progress::findOrFail($id);
+
         $progress->status = $request->status;
         $progress->deskripsi = $request->deskripsi;
+        $progress->laporans_id = $request->id;
 
         if (!File::exists(public_path('progress'))) {
             File::makeDirectory(public_path('progress'), 0755, true, true);
@@ -95,6 +102,8 @@ class ProgressController extends Controller
 
         if ($progress->save()) {
             toast('Berhasil mengubah progress','success');
+            $previousUrl = url()->previous();
+            session()->put('previousUrl', $previousUrl);
             return redirect()->back();
         } else {
             toast('Gagal mengubah progress','error');
