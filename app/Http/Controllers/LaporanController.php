@@ -163,6 +163,9 @@ class LaporanController extends Controller
     public function delete($id){
         $data = Laporan::findOrFail($id);
 
+        $progress = Progress::where('laporans_id',$id)->delete();
+        $lastest = RiwayatPerkembangan::where('laporans_id',$id)->delete();
+
         if ($data->bukti) {
             $oldFilePath = public_path('bukti_laporan/' . $data->bukti);
             if (file_exists($oldFilePath)) {

@@ -97,14 +97,24 @@
             @csrf
             <input type="email" name="email" id="email" placeholder="Email" required />
             <input type="text" name="name" id="name" placeholder="Nama Lengkap" required />
-            <input type="file" name="foto" id="foto" accept="image/*" required />
             <input type="password" name="password" id="password" placeholder="Password" required />
+            <input type="file" name="foto" id="foto" accept="image/*" onchange="loadFile(event)" required />
+            <img class="img-fluid" style="width: 100%;" id="output" />
             <button class="btn-register" type="submit">Daftar</button>
         </form>
         <div class="links">
             <a href="{{ route('login') }}">Sudah punya akun?</a>
         </div>
     </div>
+    <script>
+        var loadFile = function(event) {
+            var output = document.getElementById('output');
+            output.src = URL.createObjectURL(event.target.files[0]);
+            output.onload = function() {
+                URL.revokeObjectURL(output.src) // free memory
+            }
+        };
+    </script>
 </body>
 
 </html>

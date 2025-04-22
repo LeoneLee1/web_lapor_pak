@@ -57,7 +57,7 @@
             <span>Data Laporan</span></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('logout') }}">
+        <a class="nav-link" href="{{ route('logout') }}" onclick="return logout()">
             <i class="fas fa-fw fa-power-off"></i>
             <span>Logout</span></a>
     </li>

@@ -18,42 +18,47 @@
                                 <strong>Detail Informasi</strong>
                             </div>
                             <div class="row">
-                                <div class="col-md-4">
-                                    <span class="text-muted">Kode :</span>
+                                <div class="col-md-6">
+                                    <span class="text-muted" style="width: 100px; display: inline-block;">Kode</span>
                                     <span>{{ $item->kode_laporan }}</span>
                                 </div>
-                                <div class="col-md-4">
-                                    <span class="text-muted">Tanggal :</span>
+                                <div class="col-md-6">
+                                    <span class="text-muted mb-1"
+                                        style="width: 100px; display: inline-block;">Tanggal</span>
                                     <span>{{ formattedDate($item->created_at) }}</span>
                                 </div>
-                                <div class="col-md-4">
-                                    <span class="text-muted">Kategori :</span>
+                                <div class="col-md-6">
+                                    <span class="text-muted mb-1"
+                                        style="width: 100px; display: inline-block;">Kategori</span>
                                     <span>{{ $item->kategori }}</span>
                                 </div>
-                                <div class="col-md-4">
-                                    <span class="text-muted">Lokasi :</span>
+                                <div class="col-md-6">
+                                    <span class="text-muted mb-1"
+                                        style="width: 100px; display: inline-block;">Lokasi</span>
                                     <span>{{ $item->alamat }}</span>
                                 </div>
-                                <div class="col-md-4">
-                                    <span class="text-muted">Status :</span>
+                                <div class="col-md-6">
+                                    <span class="text-muted mb-1"
+                                        style="width: 100px; display: inline-block;">Status</span>
                                     {!! customStatus($item->status) !!}
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="card mt-4">
+                    <div class="card mt-3">
                         <div class="card-body">
                             <div class="card-title mb-3">
                                 <strong>Riwayat Perkembangan</strong>
                             </div>
-                            @foreach ($lastest as $last)
-                                @if ($last->laporans_id == $item->id)
-                                    <li>
-                                        {{ formattedDate($last->created_at) }}
-                                        {{ $last->activity }}
-                                    </li>
-                                @endif
-                            @endforeach
+                            <ul>
+                                @foreach ($lastest as $last)
+                                    @if ($last->laporans_id == $item->id)
+                                        <li class="mb-1">
+                                            {{ formattedDate($last->created_at) }} - {{ $last->activity }}
+                                        </li>
+                                    @endif
+                                @endforeach
+                            </ul>
                         </div>
                     </div>
                 </div>

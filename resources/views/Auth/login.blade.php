@@ -133,9 +133,9 @@
         <h2>Selamat Datang di</h2>
         <h2>Lapor Pak👋</h2>
         <p>Silakan masuk untuk melanjutkan</p>
-        <button class="btn-google"><i class="fa-brands fa-google"></i>&nbsp;Masuk dengan
+        {{-- <button class="btn-google"><i class="fa-brands fa-google"></i>&nbsp;Masuk dengan
             Google</button>
-        <div class="separator"><span>atau</span></div>
+        <div class="separator"><span>atau</span></div> --}}
         <form action="login/proses" method="POST" enctype="multipart/form-data">
             @csrf
             <input type="email" placeholder="Email" id="email" name="email" required />

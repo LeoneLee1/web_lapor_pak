@@ -1,5 +1,18 @@
 @extends('Components.base')
 
+@push('after-style')
+    <style>
+        .nav-tabs .nav-link.active {
+            background-color: #28a745;
+            /* bg-success */
+            color: white;
+            /* Teks putih */
+            border-color: #28a745;
+            /* Sesuaikan border jika diinginkan */
+        }
+    </style>
+@endpush
+
 @section('content')
     <div class="container mt-4">
         <ul class="nav nav-tabs justify-content-center custom-nav-tabs" role="tablist">

@@ -22,7 +22,10 @@
             </div>
             <div class="mb-3">
                 <label class="form-label">Avatar</label>
-                <input type="file" name="avatar" class="form-control">
+                <input type="file" name="avatar" class="form-control" accept="image/*" onchange="loadFile(event)">
+                <div class="mt-2">
+                    <img class="img-fluid" style="width: 100%;" id="output" />
+                </div>
             </div>
             <div class="d-grid gap-2">
                 <button type="submit" class="btn btn-primary">Simpan</button>
@@ -30,3 +33,15 @@
         </form>
     </div>
 @endsection
+
+@push('after-script')
+    <script>
+        var loadFile = function(event) {
+            var output = document.getElementById('output');
+            output.src = URL.createObjectURL(event.target.files[0]);
+            output.onload = function() {
+                URL.revokeObjectURL(output.src) // free memory
+            }
+        };
+    </script>
+@endpush

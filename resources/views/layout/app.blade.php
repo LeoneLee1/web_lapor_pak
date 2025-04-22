@@ -95,6 +95,15 @@
     @stack('before-script')
     @include('includes.script')
     @stack('after-script')
+    <script>
+        function logout() {
+            if (confirm('Keluar dari Akun?')) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    </script>
 </body>
 
 </html>
