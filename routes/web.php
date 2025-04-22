@@ -104,6 +104,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::prefix('camera')->group(function (){
         Route::get('/',[BerandaController::class,'camera'])->name('camera');
+        Route::post('/laporkan',[BerandaController::class,'laporkan'])->name('camera.laporkan');
     });
 
     Route::get('/chat',[BerandaController::class,'chat'])->name('chat');

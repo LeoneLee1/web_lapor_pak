@@ -9,7 +9,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <img src="{{ asset('bukti_laporan/' . $item->bukti) }}" alt="bukti laporan" class="img-fluid">
+                <img src="{{ asset('bukti_laporan/' . $item->bukti) }}" alt="bukti laporan" style="width: 100%;">
                 <div class="mt-4">
                     <h5 style="font-weight: bold;">{{ $item->judul }}</h5>
                     <div class="card mt-4">

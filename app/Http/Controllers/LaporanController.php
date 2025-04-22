@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Progress;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Models\RiwayatPerkembangan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -85,6 +86,12 @@ class LaporanController extends Controller
             $delivered->deskripsi = 'Laporan terkirim';
             $delivered->laporans_id = $laporan->id;
             $delivered->save();
+
+            $lastest = new RiwayatPerkembangan();
+            $lastest->activity = 'Laporan terkirim';
+            $lastest->progress_id = $delivered->id;
+            $lastest->laporans_id = $laporan->id;
+            $lastest->save();
 
             toast('Berhasil membuat laporan','success');
             return redirect()->route('data_laporan');

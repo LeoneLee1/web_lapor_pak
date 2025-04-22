@@ -104,3 +104,25 @@ function takeSnapshot() {
             );
         });
 }
+
+// ganti kamera depan dan belakang
+// user = kamera depan
+// environment = kamera belakang
+let currentFacingMode = "user"; // default kamera depan
+
+function toggleCamera() {
+    currentFacingMode = currentFacingMode === "user" ? "environment" : "user";
+
+    navigator.mediaDevices
+        .getUserMedia({
+            video: { facingMode: { exact: currentFacingMode } },
+        })
+        .then(function (stream) {
+            let video = document.getElementById("video-webcam");
+            video.srcObject = stream;
+        })
+        .catch(function (error) {
+            console.error("Gagal mengakses kamera:", error);
+            alert("Tidak bisa mengakses kamera ");
+        });
+}

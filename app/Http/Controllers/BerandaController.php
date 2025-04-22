@@ -6,10 +6,13 @@ use Carbon\Carbon;
 use App\Models\Laporan;
 use App\Models\Category;
 use App\Models\Progress;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\RiwayatPerkembangan;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class BerandaController extends Controller
 {
@@ -132,7 +135,66 @@ class BerandaController extends Controller
     }
 
     public function camera(){
-        return view('Pages.Camera.index');
+
+        $categories = Category::all();
+
+        return view('Pages.Camera.index',compact('categories'));
+    }
+
+    public function laporkan(Request $request){
+
+        $request->validate([
+            'judul' => 'required|string',
+            'kategori' => 'required|string',
+            'deskripsi' => 'required|string',
+            'bukti' => 'required|image',
+            'alamat' => 'required|string',
+        ]);
+
+        $randomNumber = Str::random(6);
+
+        $categories = Category::where('name',$request->kategori)->first();
+
+        $laporan = new Laporan();
+        $laporan->kode_laporan = "LAPOR$randomNumber";
+        $laporan->pelapor = Auth::user()->name;
+        $laporan->judul = $request->judul;
+        $laporan->deskripsi = $request->deskripsi;
+        $laporan->latitude = $request->latitude;
+        $laporan->longitude = $request->longitude;
+        $laporan->alamat = $request->alamat;
+        $laporan->users_id = Auth::user()->id;
+        $laporan->categories_id = $categories->id;
+
+        if (!File::exists(public_path('bukti_laporan'))) {
+            File::makeDirectory(public_path('bukti_laporan'), 0755, true, true);
+        }
+        
+        if ($request->hasFile('bukti')) {
+            $fileName = time() . '.' . $request->bukti->extension();
+            $request->bukti->move(public_path('bukti_laporan'), $fileName);
+            $laporan->bukti = $fileName;
+        }
+
+        if ($laporan->save()) {
+
+            $delivered = new Progress();
+            $delivered->status = 'Delivered';
+            $delivered->deskripsi = 'Laporan terkirim';
+            $delivered->laporans_id = $laporan->id;
+            $delivered->save();
+
+            $lastest = new RiwayatPerkembangan();
+            $lastest->activity = 'Laporan terkirim';
+            $lastest->progress_id = $delivered->id;
+            $lastest->laporans_id = $laporan->id;
+            $lastest->save();
+
+            return view('Pages.Camera.success-message');
+        } else {
+            toast('Gagal membuat laporan','error');
+            return redirect()->back();
+        }
     }
 
     public function chat(){
