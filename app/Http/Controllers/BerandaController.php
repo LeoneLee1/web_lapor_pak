@@ -18,7 +18,7 @@ class BerandaController extends Controller
 {
     public function index(){
         $categories = Category::all();
-        
+
         $laporan = DB::table('laporans as a')
                     ->select('a.*', 'b.status')
                     ->leftJoin('progress as b', function ($join){
@@ -27,7 +27,7 @@ class BerandaController extends Controller
                     })
                     ->orderByDesc('a.id')
                     ->get();
-        
+
         $lingkungan = DB::table('laporans as a')
                     ->select('a.*', 'b.status')
                     ->leftJoin('progress as b', function ($join){
@@ -47,7 +47,7 @@ class BerandaController extends Controller
                     ->where('a.categories_id', '=', 2)
                     ->orderByDesc('a.id')
                     ->get();
-        
+
         $infrastruktur = DB::table('laporans as a')
                         ->select('a.*', 'b.status')
                         ->leftJoin('progress as b', function ($join){
@@ -92,7 +92,7 @@ class BerandaController extends Controller
                     ->where('a.users_id', '=', $idAuth)
                     ->orderByDesc('a.id')
                     ->get();
-        
+
         $diproses = DB::table('laporans as a')
                     ->select('a.*', 'b.status', 'c.name as kategori', 'b.deskripsi')
                     ->leftJoin('progress as b', function ($join){
@@ -128,7 +128,7 @@ class BerandaController extends Controller
                     ->where('a.users_id', '=', $idAuth)
                     ->orderByDesc('a.id')
                     ->get();
-        
+
         $lastest = RiwayatPerkembangan::all();
 
         return view('Pages.Laporanmu.index',compact('terkirim','diproses','selesai','ditolak','lastest'));
@@ -169,7 +169,7 @@ class BerandaController extends Controller
         if (!File::exists(public_path('bukti_laporan'))) {
             File::makeDirectory(public_path('bukti_laporan'), 0755, true, true);
         }
-        
+
         if ($request->hasFile('bukti')) {
             $fileName = time() . '.' . $request->bukti->extension();
             $request->bukti->move(public_path('bukti_laporan'), $fileName);
